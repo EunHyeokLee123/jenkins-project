@@ -38,7 +38,7 @@ spring:
             - AuthorizationHeaderFilter
 
         - id: order-service
-          uri: http://user-service.default.svc.cluster.local:8083
+          uri: http://order-service.default.svc.cluster.local:8083
           predicates:
             - Path=/order-service/**
           filters:
@@ -47,7 +47,7 @@ spring:
             - AuthorizationHeaderFilter
 
         - id: course-service
-          uri: http://user-service.default.svc.cluster.local:8082
+          uri: http://course-service.default.svc.cluster.local:8082
           predicates:
             - Path=/course-service/**
           filters:
@@ -56,7 +56,7 @@ spring:
             - AuthorizationHeaderFilter
 
         - id: post-service
-          uri: http://user-service.default.svc.cluster.local:8084
+          uri: http://post-service.default.svc.cluster.local:8084
           predicates:
             - Path=/post-service/**
           filters:
@@ -65,7 +65,7 @@ spring:
             - AuthorizationHeaderFilter
 
         - id: eval-service
-          uri: http://user-service.default.svc.cluster.local:8085
+          uri: http://eval-service.default.svc.cluster.local:8085
           predicates:
             - Path=/eval-service/**
           filters:

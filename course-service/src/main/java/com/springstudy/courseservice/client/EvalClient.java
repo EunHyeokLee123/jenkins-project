@@ -9,7 +9,7 @@ import java.util.Map;
 
 
 // course 브랜치를 병합받았는데, 선인이 되어있지 않아서, 따로 만든 클라이언트 입니다!
-@FeignClient(name = "eval-service")
+@FeignClient(name = "eval-service", url = "http://eval-service.default.svc.cluster.local:8085")
 public interface EvalClient {
 
     @PostMapping("eval/course-eval-rating-feign")

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 
-@FeignClient(name = "course-service")
+@FeignClient(name = "course-service", url = "http://course-service.default.svc.cluster.local:8082")
 public interface ProductServiceClient {
 
     @GetMapping("/courses/info/{id}")

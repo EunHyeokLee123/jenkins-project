@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
-@FeignClient(name= "order-service")
+@FeignClient(name= "order-service", url = "http://order-service.default.svc.cluster.local:8083")
 public interface OrderServiceClient {
 
     @GetMapping("/order/ordereduser/{id}")
