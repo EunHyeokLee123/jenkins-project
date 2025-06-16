@@ -10,7 +10,7 @@ pipeline {
         SERVICE_DIRS="config-service, discovery-service, gateway-service,order-service,user-service, course-service, post-service, eval-service"
         ECR_URL="891612549514.dkr.ecr.ap-northeast-2.amazonaws.com"
         REGION="ap-northeast-2"
-        JAVA_HOME = '/usr/lib/jvm/java-17-openjdk-amd64'
+        JAVA_HOME = '/opt/java/openjdk'
         PATH = "${JAVA_HOME}/bin:${env.PATH}"
     }
     stages {
