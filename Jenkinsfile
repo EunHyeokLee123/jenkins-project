@@ -7,7 +7,7 @@ def projectName = "msa-project"
 pipeline {
     agent any // 젠킨스 서버가 여러개 일때, 어느 젠킨스 서버에서나 실행이 가능
     environment{
-        SERVICE_DIRS="config-service, discovery-service, gateway-service,order-service,user-service, course-service, post-service, eval-service"
+        SERVICE_DIRS="config-service,discovery-service,gateway-service,order-service,user-service,course-service,post-service,eval-service"
         ECR_URL="891612549514.dkr.ecr.ap-northeast-2.amazonaws.com"
         REGION="ap-northeast-2"
         JAVA_HOME = '/opt/java/openjdk'

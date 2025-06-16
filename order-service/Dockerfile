@@ -1,4 +1,4 @@
-# Base 이미지
+    # Base 이미지
 FROM openjdk:17-jdk-slim
 
 COPY build/libs/*.jar /app.jar
