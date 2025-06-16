@@ -34,7 +34,7 @@ dependencies {
 
 
 	// 유레카 서버에서 확인을 위해 주석 해제했습니다.
-	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+	// implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
 
 
 

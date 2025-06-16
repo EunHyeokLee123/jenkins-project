@@ -14,7 +14,7 @@ spring:
           "[/**]":
             allowed-origins:
               - "http://localhost:5173"
-              - "http://mymsaproject-playdata-bucket.s3-website.ap-northeast-2.amazonaws.com"
+              - "https://infolearnplaydata123456.shop"
             allowed-methods:
               - GET
               - POST
@@ -29,7 +29,7 @@ spring:
 
       routes:
         - id: user-service
-          uri: lb://USER-SERVICE
+          uri: http://user-service.default.svc.cluster.local:8081
           predicates:
             - Path=/user-service/**
           filters:
@@ -38,7 +38,7 @@ spring:
             - AuthorizationHeaderFilter
 
         - id: order-service
-          uri: lb://ORDER-SERVICE
+          uri: http://user-service.default.svc.cluster.local:8083
           predicates:
             - Path=/order-service/**
           filters:
@@ -47,7 +47,7 @@ spring:
             - AuthorizationHeaderFilter
 
         - id: course-service
-          uri: lb://COURSE-SERVICE
+          uri: http://user-service.default.svc.cluster.local:8082
           predicates:
             - Path=/course-service/**
           filters:
@@ -56,7 +56,7 @@ spring:
             - AuthorizationHeaderFilter
 
         - id: post-service
-          uri: lb://POST-SERVICE
+          uri: http://user-service.default.svc.cluster.local:8084
           predicates:
             - Path=/post-service/**
           filters:
@@ -65,7 +65,7 @@ spring:
             - AuthorizationHeaderFilter
 
         - id: eval-service
-          uri: lb://EVAL-SERVICE
+          uri: http://user-service.default.svc.cluster.local:8085
           predicates:
             - Path=/eval-service/**
           filters:
