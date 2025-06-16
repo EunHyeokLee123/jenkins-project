@@ -10,6 +10,8 @@ pipeline {
         SERVICE_DIRS="config-service, discovery-service, gateway-service,order-service,user-service, course-service, post-service, eval-service"
         ECR_URL="891612549514.dkr.ecr.ap-northeast-2.amazonaws.com"
         REGION="ap-northeast-2"
+        JAVA_HOME = '/usr/lib/jvm/java-17-openjdk-amd64'
+        PATH = "${JAVA_HOME}/bin:${env.PATH}"
     }
     stages {
             // 각 작업 단위를 스테이지로 나누어서 작성 가능.

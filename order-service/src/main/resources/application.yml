@@ -46,3 +46,6 @@ oauth2:
     client-id: # 꼭 지워주시고 push 하셔야 합니다!!!!!
     redirect_uri: http://localhost:8000/order-service/order/kakao
     secret_key: # 꼭 지워주시고 push 하셔야 합니다!!!!!
+
+
+    # asd
