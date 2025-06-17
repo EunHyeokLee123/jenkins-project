@@ -38,11 +38,16 @@ pipeline {
                         string(credentialsId: 'ORDER-SECRET-KEY', variable: 'KAKAO_SECRET_KEY')
                     ]) {
                         sh """
-                        echo "oauth2:
+            cat <<EOF >> order-service/src/main/resources/application.yml
+
+            # Injected by Jenkins
+            oauth2:
               kakao:
-                client-id: \\"${KAKAO_CLIENT_ID}\\"
+                client-id: "${KAKAO_CLIENT_ID}"
                 redirect_uri: https://api.infolearnplaydata123456.shop/order-service/order/kakao
-                secret_key: \\"${KAKAO_SECRET_KEY}\\"" >> order-service/src/main/resources/application.yml
+                secret_key: "${KAKAO_SECRET_KEY}"
+
+            EOF
                         """
                     }
                 }
@@ -54,14 +59,16 @@ pipeline {
                         string(credentialsId: 'USER-CLIENT-ID', variable: 'KAKAO_CLIENT_ID')
                     ]) {
                        sh """
-echo '
-# Injected by Jenkins
-oauth2:
-    kakao:
-        client-id: "${KAKAO_CLIENT_ID}"
-        redirect_uri: https://api.infolearnplaydata123456.shop/user-service/user/kakao
-    ' >> user-service/src/main/resources/application.yml
-                          """
+                       cat <<EOF >> user-service/src/main/resources/application.yml
+
+                       # Injected by Jenkins
+                       oauth2:
+                         kakao:
+                           client-id: "${KAKAO_CLIENT_ID}"
+                           redirect_uri: https://api.infolearnplaydata123456.shop/user-service/user/kakao
+
+                       EOF
+                       """
                        }
                 }
             }

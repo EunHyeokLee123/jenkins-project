@@ -33,12 +33,5 @@ jwt:
   secretKeyRt: rI9KLc/nWq+0ehvbQXjST52lIHi+A4PurdKwAe0ZcN+0LE1QBv7p0qhFx8wzt8PaigtMXpJHdIl6p4ILsLDasA==
   expirationRt: 120
 
-eureka:
-  client:
-    register-with-eureka: true
-    fetch-registry: true
-    service-url:
-      defaultZone: http://localhost:8761/eureka
-      instance:
-        instance-id: ${spring.cloud.client.ip-address}:${spring.application.instance_id:${random.value}}
+
 
