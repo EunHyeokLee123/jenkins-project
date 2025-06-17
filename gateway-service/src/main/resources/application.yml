@@ -14,7 +14,7 @@ spring:
           "[/**]":
             allowed-origins:
               - "http://localhost:5173"
-              - "https://api.infolearnplaydata123456.shop"
+              - "https://infolearnplaydata123456.shop"
             allowed-methods:
               - GET
               - POST
