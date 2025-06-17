@@ -33,9 +33,9 @@ public class CommonExceptionHandler {
     public ResponseEntity<?> entityNotFoundHandler(EntityNotFoundException e) {
         e.printStackTrace();
 
-        CommonErrorDto errorDTO = new CommonErrorDto(HttpStatus.NOT_FOUND, e.getMessage());
+        CommonErrorDto errorDTO = new CommonErrorDto(HttpStatus.BAD_REQUEST, e.getMessage());
 
-        return new ResponseEntity<>(errorDTO, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(errorDTO, HttpStatus.BAD_REQUEST);
 
     }
 

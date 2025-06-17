@@ -29,8 +29,8 @@ public class CommonExceptionHandler {
     public ResponseEntity<?> entityNotFountHandler(EntityNotFoundException e) {
         e.printStackTrace();
         CommonErrorDto errorDto
-                = new CommonErrorDto(HttpStatus.NOT_FOUND, e.getMessage());
-        return new ResponseEntity<>(errorDto, HttpStatus.NOT_FOUND);
+                = new CommonErrorDto(HttpStatus.BAD_REQUEST, e.getMessage());
+        return new ResponseEntity<>(errorDto, HttpStatus.BAD_REQUEST);
     }
 
     // 특정 권한을 가지지 못한 사용자가 요청을 보냈을 때 내쫓는 메서드
