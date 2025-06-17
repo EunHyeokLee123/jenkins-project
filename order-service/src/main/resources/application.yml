@@ -24,7 +24,7 @@ spring:
     refresh:
       extra-refreshable: com.zaxxer.hikari.HikariDataSource
 
-# ㅁㄴㅇㅁㄴㅇㅁㄴㅇ
+# ㅁㄴㅇㅁㄴㅇㅁㄴㅇasdasd
 
 jwt:
   expiration: 60

@@ -41,7 +41,7 @@ pipeline {
                         echo "oauth2:
               kakao:
                 client-id: \\"${KAKAO_CLIENT_ID}\\"
-                redirect_uri: https://infolearnplaydata123456.shop/order-service/order/kakao
+                redirect_uri: https://api.infolearnplaydata123456.shop/order-service/order/kakao
                 secret_key: \\"${KAKAO_SECRET_KEY}\\"" >> order-service/src/main/resources/application.yml
                         """
                     }
@@ -59,7 +59,7 @@ echo '
 oauth2:
     kakao:
         client-id: "${KAKAO_CLIENT_ID}"
-        redirect_uri: https://infolearnplaydata123456.shop/user-service/user/kakao
+        redirect_uri: https://api.infolearnplaydata123456.shop/user-service/user/kakao
     ' >> user-service/src/main/resources/application.yml
                           """
                        }
