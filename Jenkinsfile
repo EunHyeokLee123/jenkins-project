@@ -31,6 +31,38 @@ pipeline {
                 }
             }
 
+            stage('Inject Kakao Secret to order-service') {
+                steps {
+                    withCredentials([
+                        string(credentialsId: 'ORDER-CLIENT-ID', variable: 'KAKAO_CLIENT_ID'),
+                        string(credentialsId: 'ORDER-SECRET-KEY', variable: 'KAKAO_SECRET_KEY')
+                    ]) {
+                        sh """
+                        echo "oauth2:
+              kakao:
+                client-id: \\"${KAKAO_CLIENT_ID}\\"
+                redirect_uri: http://localhost:8000/order-service/order/kakao
+                secret_key: \\"${KAKAO_SECRET_KEY}\\"" > order-service/src/main/resources/application.yml
+                        """
+                    }
+                }
+            }
+
+            stage('Inject Kakao Secret to user-service') {
+                  steps {
+                      withCredentials([
+                          string(credentialsId: 'USER-CLIENT-ID', variable: 'KAKAO_CLIENT_ID')
+                          ]) {
+                             sh """
+                             echo "oauth2:
+                  kakao:
+                      client-id: \\"${KAKAO_CLIENT_ID}\\"
+                      redirect_uri: http://localhost:8000/order-service/order/kakao
+                             """
+                             }
+                        }
+                    }
+
             stage('Detect Changes') {
                 steps {
                     script {
