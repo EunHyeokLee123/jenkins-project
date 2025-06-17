@@ -31,47 +31,25 @@ pipeline {
                 }
             }
 
-            stage('Inject Kakao Secret to order-service') {
-                steps {
-                    withCredentials([
-                        string(credentialsId: 'ORDER-CLIENT-ID', variable: 'KAKAO_CLIENT_ID'),
-                        string(credentialsId: 'ORDER-SECRET-KEY', variable: 'KAKAO_SECRET_KEY')
-                    ]) {
-                        sh """
-            cat <<EOF >> order-service/src/main/resources/application.yml
+            stage('Add Secret To user-service') {
+                            steps {
+                                withCredentials([file(credentialsId: 'USER-SECRET', variable: 'userSecret')]) {
+                                    script {
+                                        sh 'cp $userSecret user-service/src/main/resources/application.yml'
+                                    }
+                                }
+                            }
+                        }
 
-            # Injected by Jenkins
-            oauth2:
-              kakao:
-                client-id: "${KAKAO_CLIENT_ID}"
-                redirect_uri: https://api.infolearnplaydata123456.shop/order-service/order/kakao
-                secret_key: "${KAKAO_SECRET_KEY}"
-
-            EOF
-                        """
-                    }
-                }
-            }
-
-            stage('Inject Kakao Secret to user-service') {
-                steps {
-                    withCredentials([
-                        string(credentialsId: 'USER-CLIENT-ID', variable: 'KAKAO_CLIENT_ID')
-                    ]) {
-                       sh """
-                       cat <<EOF >> user-service/src/main/resources/application.yml
-
-                       # Injected by Jenkins
-                       oauth2:
-                         kakao:
-                           client-id: "${KAKAO_CLIENT_ID}"
-                           redirect_uri: https://api.infolearnplaydata123456.shop/user-service/user/kakao
-
-                       EOF
-                       """
-                       }
-                }
-            }
+            stage('Add Secret To order-service') {
+                            steps {
+                                withCredentials([file(credentialsId: 'ORDER-SECRET', variable: 'orderSecret')]) {
+                                    script {
+                                        sh 'cp $orderSecret order-service/src/main/resources/application.yml'
+                                    }
+                                }
+                            }
+                        }
 
             stage('Detect Changes') {
                 steps {
