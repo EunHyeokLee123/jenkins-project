@@ -49,19 +49,22 @@ pipeline {
             }
 
             stage('Inject Kakao Secret to user-service') {
-                  steps {
-                      withCredentials([
-                          string(credentialsId: 'USER-CLIENT-ID', variable: 'KAKAO_CLIENT_ID')
-                          ]) {
-                             sh """
-                             echo "oauth2:
-                  kakao:
-                      client-id: \\"${KAKAO_CLIENT_ID}\\"
-                      redirect_uri: http://localhost:8000/user-service/user/kakao
-                             """
-                             }
+                steps {
+                    withCredentials([
+                        string(credentialsId: 'USER-CLIENT-ID', variable: 'KAKAO_CLIENT_ID')
+                    ]) {
+                        script {
+                            def ymlContent = """\
+            oauth2:
+              kakao:
+                client-id: "${KAKAO_CLIENT_ID}"
+                redirect_uri: http://localhost:8000/user-service/user/kakao
+            """
+                            writeFile file: 'user-service/src/main/resources/application.yml', text: ymlContent
                         }
                     }
+                }
+            }
 
             stage('Detect Changes') {
                 steps {
