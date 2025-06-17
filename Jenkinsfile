@@ -53,20 +53,18 @@ pipeline {
                     withCredentials([
                         string(credentialsId: 'USER-CLIENT-ID', variable: 'KAKAO_CLIENT_ID')
                     ]) {
-                        script {
-                            def ymlContent = """
+                       def clientId = env.KAKAO_CLIENT_ID  // 또는 그냥 KAKAO_CLIENT_ID가 될 수도 있음
+                           def ymlContent = """
+                       # Injected by Jenkins
+                       oauth2:
+                         kakao:
+                           client-id: "${clientId}"
+                           redirect_uri: http://localhost:8000/user-service/user/kakao
+                       """
 
-            # Injected by Jenkins
-            oauth2:
-              kakao:
-                client-id: "${KAKAO_CLIENT_ID}"
-                redirect_uri: http://localhost:8000/user-service/user/kakao
-            """
-                            // 기존 파일 내용을 읽고 덧붙임
-                            def existing = readFile('user-service/src/main/resources/application.yml')
-                            def finalContent = existing + ymlContent
-                            writeFile file: 'user-service/src/main/resources/application.yml', text: finalContent
-                        }
+                           def existing = readFile('user-service/src/main/resources/application.yml')
+                           def finalContent = existing + ymlContent
+                           writeFile file: 'user-service/src/main/resources/application.yml', text: finalContent
                     }
                 }
             }
