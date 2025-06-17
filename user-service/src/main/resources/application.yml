@@ -53,10 +53,3 @@ eureka:
       instance:
         instance-id: ${spring.cloud.client.ip-address}:${spring.application.instance_id:${random.value}}
 
-oauth2:
-  kakao:
-    client-id:
-    redirect-uri: http://localhost:8000/user-service/user/kakao
-
-
-    # asd# asdasdasd

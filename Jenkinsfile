@@ -42,7 +42,7 @@ pipeline {
               kakao:
                 client-id: \\"${KAKAO_CLIENT_ID}\\"
                 redirect_uri: http://localhost:8000/order-service/order/kakao
-                secret_key: \\"${KAKAO_SECRET_KEY}\\"" > order-service/src/main/resources/application.yml
+                secret_key: \\"${KAKAO_SECRET_KEY}\\"" >> order-service/src/main/resources/application.yml
                         """
                     }
                 }
@@ -54,13 +54,18 @@ pipeline {
                         string(credentialsId: 'USER-CLIENT-ID', variable: 'KAKAO_CLIENT_ID')
                     ]) {
                         script {
-                            def ymlContent = """\
+                            def ymlContent = """
+
+            # Injected by Jenkins
             oauth2:
               kakao:
                 client-id: "${KAKAO_CLIENT_ID}"
                 redirect_uri: http://localhost:8000/user-service/user/kakao
             """
-                            writeFile file: 'user-service/src/main/resources/application.yml', text: ymlContent
+                            // 기존 파일 내용을 읽고 덧붙임
+                            def existing = readFile('user-service/src/main/resources/application.yml')
+                            def finalContent = existing + ymlContent
+                            writeFile file: 'user-service/src/main/resources/application.yml', text: finalContent
                         }
                     }
                 }
