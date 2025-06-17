@@ -57,7 +57,7 @@ pipeline {
                              echo "oauth2:
                   kakao:
                       client-id: \\"${KAKAO_CLIENT_ID}\\"
-                      redirect_uri: http://localhost:8000/order-service/order/kakao
+                      redirect_uri: http://localhost:8000/user-service/user/kakao
                              """
                              }
                         }
