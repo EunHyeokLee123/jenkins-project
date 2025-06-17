@@ -54,15 +54,15 @@ pipeline {
                         string(credentialsId: 'USER-CLIENT-ID', variable: 'KAKAO_CLIENT_ID')
                     ]) {
                        sh """
-                                   echo '
-                       # Injected by Jenkins
-                       oauth2:
-                         kakao:
-                           client-id: "${KAKAO_CLIENT_ID}"
-                           redirect_uri: http://localhost:8000/user-service/user/kakao
-                       ' >> user-service/src/main/resources/application.yml
-                               """
-                           }
+echo '
+# Injected by Jenkins
+oauth2:
+    kakao:
+        client-id: "${KAKAO_CLIENT_ID}"
+        redirect_uri: http://localhost:8000/user-service/user/kakao
+    ' >> user-service/src/main/resources/application.yml
+                          """
+                       }
                 }
             }
 
