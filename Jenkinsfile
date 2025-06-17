@@ -63,7 +63,6 @@ pipeline {
                        ' >> user-service/src/main/resources/application.yml
                                """
                            }
-                    }
                 }
             }
 
