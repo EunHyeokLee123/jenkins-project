@@ -162,9 +162,9 @@ public class EvalController {
     // 이건 course-service에서 feign으로 보낸다는 가정 하에 작성하는 로직
     // 위의 메소드와 둘 중 하나만 사용할 것
     @PostMapping("/course-eval-rating-feign")
-    public CommonResDto<Map<Long, Double>> findCoursesRatingFeign(@RequestBody List<Long> prodIdList) {
+    public ResponseEntity<CommonResDto<Map<Long, Double>>>  findCoursesRatingFeign(@RequestBody List<Long> prodIdList) {
         Map<Long, Double> ratingMap = evalService.findCourseRating(prodIdList);
-        return new CommonResDto<>(HttpStatus.OK,"해당 강의들의 모든 평균 평점을 찾음",ratingMap );
+        return ResponseEntity.ok(new CommonResDto<>(HttpStatus.OK,"해당 강의들의 모든 평균 평점을 찾음",ratingMap ));
     }
 
     // 평가 등록 및 수정 시 평가 개수와 평점의 평균을 최신화하는 로직

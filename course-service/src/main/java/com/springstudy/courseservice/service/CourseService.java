@@ -281,4 +281,70 @@ public class CourseService {
                         .orElse("Unknown"))
                 .build();
     }
+
+    @Transactional(readOnly = true)
+    public Page<CourseResponseDto> getCoursesByCategoryAndSort(String category, int page, int size, String sort) {
+        Pageable pageable = PageRequest.of(page, size);
+
+        if ("ratingDesc".equals(sort) || "ratingAsc".equals(sort)) {
+            // 평점 정렬 처리
+            List<Course> allCourses = courseRepository.findByCategory(category);
+            List<Long> productIds = allCourses.stream()
+                    .map(Course::getProductId)
+                    .filter(Objects::nonNull)
+                    .collect(Collectors.toList());
+
+            CommonResDto<Map<Long, Double>> response = evalClient.findCoursesRatingFeign(productIds);
+            Map<Long, Double> ratingMap = (response != null && response.getResult() != null)
+                    ? response.getResult()
+                    : new HashMap<>();
+
+            Comparator<Course> comparator = Comparator.comparingDouble(
+                    course -> ratingMap.getOrDefault(course.getProductId(), 0.0)
+            );
+            if ("ratingDesc".equals(sort)) {
+                comparator = comparator.reversed();
+            }
+
+            List<Course> sortedCourses = allCourses.stream()
+                    .filter(Course::isActive)
+                    .sorted(comparator)
+                    .collect(Collectors.toList());
+
+            int start = (int) pageable.getOffset();
+            int end = Math.min(start + pageable.getPageSize(), sortedCourses.size());
+            List<Course> pagedCourses = sortedCourses.subList(start, end);
+
+            return new PageImpl<>(
+                    pagedCourses.stream().map(this::toDto).collect(Collectors.toList()),
+                    pageable,
+                    sortedCourses.size()
+            );
+        }
+
+        // 평점 외 정렬
+        Sort sortObj;
+        switch (sort) {
+            case "name":
+                sortObj = Sort.by("productName").ascending();
+                break;
+            case "priceAsc":
+                sortObj = Sort.by("price").ascending();
+                break;
+            case "priceDesc":
+                sortObj = Sort.by("price").descending();
+                break;
+            default:
+                sortObj = Sort.unsorted();
+                break;
+        }
+
+        Page<Course> coursePage = courseRepository.findByCategory(category, PageRequest.of(page, size, sortObj));
+        List<CourseResponseDto> filtered = coursePage.stream()
+                .filter(Course::isActive)
+                .map(this::toDto)
+                .collect(Collectors.toList());
+
+        return new PageImpl<>(filtered, coursePage.getPageable(), coursePage.getTotalElements());
+    }
 }

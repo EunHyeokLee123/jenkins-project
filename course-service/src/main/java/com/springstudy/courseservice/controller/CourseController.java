@@ -75,7 +75,20 @@ public class CourseController {
     }
 
 
+    // 카테고리 + 정렬 + 페이징
+    @GetMapping("/category/{category}/sort")
+    public ResponseEntity<Page<CourseResponseDto>> getCoursesByCategorySorted(
+            @PathVariable String category,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "16") int size,
+            @RequestParam(defaultValue = "") String sort) {
 
+        if (category.equals("HTMLCSS")) {
+            category = "HTML/CSS";
+        }
+
+        return ResponseEntity.ok(courseService.getCoursesByCategoryAndSort(category, page, size, sort));
+    }
 
     // 검색
     @GetMapping("/search")
