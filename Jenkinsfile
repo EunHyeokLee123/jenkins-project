@@ -162,7 +162,7 @@ pipeline {
                              sh """
                                 cd ..
                                 ls -a
-                                git clone https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/EunHyeokLee123/k8s.git
+                                git clone https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/EunHyeokLee123/msa-project-k8s.git
                                 """
 
                                 def changedServices = env.CHANGED_SERVICES.split(",")
