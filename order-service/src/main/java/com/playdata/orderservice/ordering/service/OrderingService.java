@@ -319,9 +319,9 @@ public class OrderingService {
         requestBodyMap.put("quantity", 1);
         requestBodyMap.put("total_amount", totalAmount);
         requestBodyMap.put("tax_free_amount", 0);
-        requestBodyMap.put("approval_url", "http://localhost:8000/order-service/order/pay/completed?orderId=" + partnerOrderId);
-        requestBodyMap.put("cancel_url", "http://localhost:8000/order-service/order/pay/cancel");
-        requestBodyMap.put("fail_url", "http://localhost:8000/order-service/order/pay/fail");
+        requestBodyMap.put("approval_url", "https://api.infolearnplaydata123456.shop/order-service/order/pay/completed?orderId=" + partnerOrderId);
+        requestBodyMap.put("cancel_url", "https://api.infolearnplaydata123456.shop/order-service/order/pay/cancel");
+        requestBodyMap.put("fail_url", "https://api.infolearnplaydata123456.shop/order-service/order/pay/fail");
 
         String jsonRequestBody;
         // JSON 문자열로 변환
