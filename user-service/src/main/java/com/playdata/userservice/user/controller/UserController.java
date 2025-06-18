@@ -149,10 +149,10 @@ public class UserController {
                                 id: '%s',
                                 role: '%s',
                                 provider: 'KAKAO'
-                            }, 'http://localhost:5173');
+                            }, 'https://infolearnplaydata123456.shop');
                             window.close();
                         } else {
-                            window.location.href = 'http://localhost:5173';
+                            window.location.href = 'https://infolearnplaydata123456.shop';
                         }
                     </script>
                     <p>카카오 로그인 처리 중...</p>
