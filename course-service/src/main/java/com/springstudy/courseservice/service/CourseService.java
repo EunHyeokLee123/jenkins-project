@@ -115,6 +115,7 @@ public class CourseService {
 
        course.updateCourseInfo(courseRequestDto);
 
+        courseRepository.save(course);
 
         return toResponse(course);
     }
