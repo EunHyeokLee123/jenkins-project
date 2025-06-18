@@ -2,6 +2,7 @@
 // ECR credential helper 이름
 def ecrLoginHelper = "docker-credential-ecr-login"
 def projectName = "msa-project"
+def COMMIT_TAG = ""   // Git 태그를 넣을 환경 변수
 
 // 젠킨스 파일의 선언형 파이프라인 정의부 시작 (그루비 언어)
 pipeline {
@@ -12,7 +13,6 @@ pipeline {
         REGION="ap-northeast-2"
         JAVA_HOME = '/opt/java/openjdk'
         PATH = "${JAVA_HOME}/bin:${env.PATH}"
-        COMMIT_TAG = ""   // Git 태그를 넣을 환경 변수
     }
     stages {
             // 각 작업 단위를 스테이지로 나누어서 작성 가능.
@@ -103,7 +103,7 @@ pipeline {
 
                         def tag = sh(script: "git rev-parse --short=5 HEAD", returnStdout: true).trim()
                         echo "Using commit hash tag: ${tag}"
-                        env.COMMIT_TAG = tag
+                        COMMIT_TAG = tag
 
                     }
                 }
@@ -143,7 +143,7 @@ pipeline {
                             def changedServices = env.CHANGED_SERVICES.split(",")
                             changedServices.each { service ->
                                 // 여기서 원하는 버전을 정하거나, 커밋 태그 등을 붙여서 이미지를 만들자!
-                                def newTag = env.COMMIT_TAG // 추후에 숫자로 바꾸자!
+                                def newTag = COMMIT_TAG // 추후에 숫자로 바꾸자!
                                 def repositoryPath = "${projectName}/${service}"
 
 
@@ -202,7 +202,7 @@ pipeline {
                                              // 3. 변경된 서비스에 대해 image 태그 업데이트
                                              def changedServices = env.CHANGED_SERVICES.split(",")
                                              changedServices.each { service ->
-                                                 def newTag = env.COMMIT_TAG
+                                                 def newTag = COMMIT_TAG
                                                  def repositoryPath = "${projectName}/${service}"
                                                  def valuesYamlPath = "${k8sDir}/msa-chart/charts/${service}/values.yaml"
 
