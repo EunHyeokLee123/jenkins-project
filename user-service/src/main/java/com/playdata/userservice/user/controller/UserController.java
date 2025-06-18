@@ -80,6 +80,7 @@ public class UserController {
     // 다른 서비스에서 feign 클라이언트로 요청을 보내는 로직임
     // 절대 삭제하지 말것!
     // 본인이 사용하지 않는 메소드라고 해서 생각없이 삭제하는 몰상식한 행동을 하지 않길 바람.
+    // 주석을 수정해봅니다!
     @GetMapping("/findByEmail")
     public CommonResDto findByEmail(@RequestParam String email) {
         User foundUser = userService.findUserIdByEmail(email);
