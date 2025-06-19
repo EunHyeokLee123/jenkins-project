@@ -1,5 +1,5 @@
 # 변경감지용 주석입니다.
-
+# 변경 감지용
 spring:
   application:
     name: course-service
