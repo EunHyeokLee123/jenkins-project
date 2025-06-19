@@ -1,6 +1,7 @@
 # 변경감지용 주석입니다.
 # 변경 감지용
 # 변경이 발생합니다!
+# q변경이 발생했습니다!
 spring:
   application:
     name: course-service
