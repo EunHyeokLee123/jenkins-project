@@ -447,10 +447,7 @@
 
 ## 4. 소스코드
 
-### 4-1. Backend Source
-[👉🏻 백엔드 코드](https://github.com/cookiboii/Msa_project)
-
-### 4-2. Frontend Source
+### 4-1. Frontend Source
 [👉🏻 프론트엔드 코드](https://github.com/EunHyeokLee123/msa-project-front)
 
 ## 5. 테스트 케이스
